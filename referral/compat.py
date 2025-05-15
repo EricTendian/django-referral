@@ -1,12 +1,9 @@
-import django
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 __all__ = ["User", "AUTH_USER_MODEL"]
 
-AUTH_USER_MODEL = getattr(settings, "AUTH_USER_MODEL", "auth.USER")
+AUTH_USER_MODEL = getattr(settings, "AUTH_USER_MODEL", "auth.User")
 
-# Django 1.5+ compatibility
-if django.VERSION >= (1, 5):
-    User = settings.AUTH_USER_MODEL
-else:
-    from django.contrib.auth.models import User
+# Get the User model
+User = get_user_model()

@@ -2,8 +2,6 @@
 
 import os
 
-import django
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -36,7 +34,7 @@ INSTALLED_APPS = EXTERNAL_APPS + INTERNAL_APPS
 
 MEDIA_URL = "/media/"  # Avoids https://code.djangoproject.com/ticket/21451
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -44,8 +42,6 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
-MIDDLEWARE = MIDDLEWARE_CLASSES
 
 TEMPLATES = [
     {
@@ -56,6 +52,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.contrib.messages.context_processors.messages",
                 "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.request",
             ]
         },
     },
@@ -75,5 +72,8 @@ DATABASES = {
     }
 }
 
-if django.VERSION[:2] < (1, 6):
-    TEST_RUNNER = "discover_runner.DiscoverRunner"
+# Default test runner
+TEST_RUNNER = "django.test.runner.DiscoverRunner"
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

@@ -23,11 +23,8 @@ class Campaign(models.Model):
         verbose_name = _("Campaign")
         verbose_name_plural = _("Campaigns")
 
-    def __unicode__(self):
-        return self.name
-
     def __str__(self):
-        return self.__unicode__()
+        return self.name
 
     def count_users(self):
         count = 0
@@ -56,11 +53,8 @@ class Referrer(models.Model):
         verbose_name = _("Referrer")
         verbose_name_plural = _("Referrers")
 
-    def __unicode__(self):
-        return self.name
-
     def __str__(self):
-        return self.__unicode__()
+        return self.name
 
     def count_users(self):
         return self.users.count()
@@ -109,8 +103,5 @@ class UserReferrer(models.Model):
         verbose_name = _("User Referrer")
         verbose_name_plural = _("User Referrers")
 
-    def __unicode__(self):
-        return "%s -> %s" % (self.user.username, self.referrer.name)
-
     def __str__(self):
-        return self.__unicode__()
+        return f"{self.user.username} -> {self.referrer.name}"
